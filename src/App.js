@@ -12,11 +12,12 @@ function App() {
 	const [watch, setWatch] = useState(false);
 	var chunks = [];
 	var idRef;
-	const fps = 20;
+	const waitTime = 100;
+	
 
 
 	const startStream = () => {
-		idRef = setInterval(updateDisplayAndChunk, 100);
+		idRef = setInterval(updateDisplayAndChunk, waitTime);
 	}
 
 	const stopStream = () => {
@@ -36,7 +37,7 @@ function App() {
 		chunks.push({
 			dataUrl: srcEncoded
 		})
-		if (chunks.length === 20) {
+		if (chunks.length === 50) {
 			const chunksCopy = [...chunks];
 			uploadChunk(chunksCopy)
 			chunks.splice(0, chunks.length);
@@ -83,10 +84,11 @@ function App() {
 
 	var watchId1, watchId2;
 	var watchChunk = [];
+	let nextChunk = " ";
 
 	const startWatch = () => {
-		watchId1 = setInterval(updateImg, 100);
-		watchId2 = setInterval(updateChunk, 2000);
+		watchId1 = setInterval(updateImg, waitTime);
+		watchId2 = setInterval(updateChunk, waitTime);
 	}
 
 	const stopWatch = () => {
@@ -104,9 +106,13 @@ function App() {
 	const updateChunk = async () => {
 		const status = await getStatus();
 		const target = status.next;
-		const res = await fetch(`${JSON_URL}/${target}/1`)
-		const data = await res.json();
-		watchChunk.push(...(data.chunks))
+		if (nextChunk !== target) {
+			const res = await fetch(`${JSON_URL}/${target}/1`)
+			const data = await res.json();
+			watchChunk.push(...(data.chunks))
+			nextChunk = target;
+		}
+		console.log(watchChunk.length)
 	}
 	
 	const initalizeChunk = async () => {
