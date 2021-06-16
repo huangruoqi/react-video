@@ -5,8 +5,8 @@ import Header from './components/Header'
 import Display from './components/Display';
 import Watch from './components/Watch'
 
-const JSON_URL = "http://localhost:5000"
-// const JSON_URL = "https://react-video-stream.herokuapp.com/api"
+// const JSON_URL = "http://localhost:5000"
+const JSON_URL = "https://react-video-stream.herokuapp.com/api"
 function App() {
 	const [stream, setStream] = useState(false);
 	const [watch, setWatch] = useState(false);
