@@ -12,11 +12,12 @@ function App() {
 	const [watch, setWatch] = useState(false);
 	var chunks = [];
 	var idRef;
+	const frameTime = 100;
 
 
 
 	const startStream = () => {
-		idRef = setInterval(updateDisplayAndChunk, 200);
+		idRef = setInterval(updateDisplayAndChunk, frameTime);
 	}
 
 	const stopStream = () => {
@@ -31,12 +32,12 @@ function App() {
 		canvas.width = 600;
 		canvas.height = 337;
 		ctx.drawImage(video, 0, 0, 600, 337);
-		const srcEncoded = canvas.toDataURL('image/jpeg', 0.7);
+		const srcEncoded = canvas.toDataURL('image/jpeg', 0.3);
 		img.src = srcEncoded;
 		chunks.push({
 			dataUrl: srcEncoded
 		})
-		if (chunks.length === 50) {
+		if (chunks.length === 80) {
 			const chunksCopy = [...chunks];
 			uploadChunk(chunksCopy)
 			chunks.splice(0, chunks.length);
@@ -87,8 +88,8 @@ function App() {
 	let isLoading = false;
 
 	const startWatch = () => {
-		watchId1 = setInterval(updateImg, 200);
-		watchId2 = setInterval(updateChunk, 1000);
+		watchId1 = setInterval(updateImg, frameTime);
+		watchId2 = setInterval(updateChunk, 900);
 	}
 
 	const stopWatch = () => {
