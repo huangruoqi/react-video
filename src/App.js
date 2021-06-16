@@ -5,19 +5,18 @@ import Header from './components/Header'
 import Display from './components/Display';
 import Watch from './components/Watch'
 
-// const JSON_URL = "http://localhost:5000"
-const JSON_URL = "https://react-video-stream.herokuapp.com/api"
+const JSON_URL = "http://localhost:5000"
+// const JSON_URL = "https://react-video-stream.herokuapp.com/api"
 function App() {
 	const [stream, setStream] = useState(false);
 	const [watch, setWatch] = useState(false);
 	var chunks = [];
 	var idRef;
-	const waitTime = 100;
-	
+
 
 
 	const startStream = () => {
-		idRef = setInterval(updateDisplayAndChunk, waitTime);
+		idRef = setInterval(updateDisplayAndChunk, 200);
 	}
 
 	const stopStream = () => {
@@ -85,10 +84,11 @@ function App() {
 	var watchId1, watchId2;
 	var watchChunk = [];
 	let nextChunk = " ";
+	let isLoading = false;
 
 	const startWatch = () => {
-		watchId1 = setInterval(updateImg, waitTime);
-		watchId2 = setInterval(updateChunk, waitTime);
+		watchId1 = setInterval(updateImg, 200);
+		watchId2 = setInterval(updateChunk, 1000);
 	}
 
 	const stopWatch = () => {
@@ -101,20 +101,23 @@ function App() {
 			var watchImg = document.getElementById('watchImg');
 			watchImg.src = watchChunk.shift().dataUrl;
 		}
+		console.log(watchChunk.length);
 	}
 
 	const updateChunk = async () => {
+		if (isLoading) return;
 		const status = await getStatus();
 		const target = status.next;
 		if (nextChunk !== target) {
+			isLoading = true;
 			const res = await fetch(`${JSON_URL}/${target}/1`)
 			const data = await res.json();
 			watchChunk.push(...(data.chunks))
 			nextChunk = target;
+			isLoading = false;
 		}
-		console.log(watchChunk.length)
 	}
-	
+
 	const initalizeChunk = async () => {
 		const status = await getStatus();
 		const target = status.current;
@@ -127,7 +130,7 @@ function App() {
 		<div className="container">
 			<Header setStream={() => setStream(!stream)} setWatch={() => setWatch(!watch)} />
 			{stream ? <Display startStream={startStream} stopStream={stopStream} /> : <h3>No stream</h3>}
-			{watch && <Watch startWatch={() => {initalizeChunk(); setTimeout(startWatch, 200);}} stopWatch={stopWatch} />}
+			{watch && <Watch startWatch={() => { initalizeChunk(); setTimeout(startWatch, 200); }} stopWatch={stopWatch} />}
 		</div>
 	);
 }

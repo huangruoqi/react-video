@@ -1,9 +1,9 @@
 {
   "status": [
     {
-      "current": "chunk2",
-      "next": "chunk3",
-      "nextnext": "chunk1",
+      "current": "chunk1",
+      "next": "chunk2",
+      "nextnext": "chunk3",
       "id": 1
     }
   ],
