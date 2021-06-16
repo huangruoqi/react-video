@@ -100,9 +100,9 @@ function App() {
 	const updateImg = () => {
 		if (watchChunk.length > 0) {
 			var watchImg = document.getElementById('watchImg');
+			console.log(watchChunk[0].length)
 			watchImg.src = watchChunk.shift().dataUrl;
 		}
-		console.log(watchChunk.length);
 	}
 
 	const updateChunk = async () => {
