@@ -29,9 +29,9 @@ function App() {
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		var img = document.getElementById('img');
-		canvas.width = 600;
-		canvas.height = 337;
-		ctx.drawImage(video, 0, 0, 600, 337);
+		canvas.width = 400;
+		canvas.height = 225;
+		ctx.drawImage(video, 0, 0, 400, 225);
 		const srcEncoded = canvas.toDataURL('image/jpeg', 0.3);
 		img.src = srcEncoded;
 		chunks.push({
@@ -100,8 +100,9 @@ function App() {
 	const updateImg = () => {
 		if (watchChunk.length > 0) {
 			var watchImg = document.getElementById('watchImg');
-			console.log(watchChunk[0].length)
-			watchImg.src = watchChunk.shift().dataUrl;
+			const a = watchChunk.shift().dataUrl;
+			console.log(a.length);
+			watchImg.src = a;
 		}
 	}
 
