@@ -12,7 +12,7 @@ function App() {
 	const [watch, setWatch] = useState(false);
 	var chunks = [];
 	var idRef;
-	const frameTime = 333;
+	const frameTime = 350;
 
 
 
@@ -32,12 +32,12 @@ function App() {
 		canvas.width = 500;
 		canvas.height = 281;
 		ctx.drawImage(video, 0, 0, 500, 281);
-		const srcEncoded = canvas.toDataURL('image/jpeg', 0.6);
+		const srcEncoded = canvas.toDataURL('image/jpeg', 0.55);
 		img.src = srcEncoded;
 		chunks.push({
 			dataUrl: srcEncoded
 		})
-		if (chunks.length === 10) {
+		if (chunks.length === 12) {
 			const chunksCopy = [...chunks];
 			uploadChunk(chunksCopy)
 			chunks.splice(0, chunks.length);
