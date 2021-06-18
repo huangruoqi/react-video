@@ -8,7 +8,7 @@ const Watch = ({startWatch, stopWatch}) => {
 	return (
 
 		<div>
-			<img id="watchImg" height="180" width="320" alt='No Video'></img>	
+			<img id="watchImg" height="281" width="500" alt='No Video'></img>	
 			<Button text='Stop' color='steelblue' onClick={stopWatch} />
 		</div>
 	)
