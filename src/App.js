@@ -32,7 +32,7 @@ function App() {
 		canvas.width = 600;
 		canvas.height = 337;
 		ctx.drawImage(video, 0, 0, 600, 337);
-		const srcEncoded = canvas.toDataURL('image/jpeg', 0.5);
+		const srcEncoded = canvas.toDataURL('image/jpeg', 0.25);
 		img.src = srcEncoded;
 		chunks.push({
 			dataUrl: srcEncoded
