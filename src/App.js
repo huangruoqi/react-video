@@ -5,8 +5,8 @@ import Header from './components/Header'
 import Display from './components/Display';
 import Watch from './components/Watch'
 
-// const JSON_URL = "http://localhost:5000"
-const JSON_URL = "https://react-video-stream.herokuapp.com/api"
+const JSON_URL = "http://localhost:5000"
+// const JSON_URL = "https://react-video-stream.herokuapp.com/api"
 function App() {
 	const [stream, setStream] = useState(false);
 	const [watch, setWatch] = useState(false);
@@ -29,10 +29,10 @@ function App() {
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		var img = document.getElementById('img');
-		canvas.width = 500;
-		canvas.height = 281;
-		ctx.drawImage(video, 0, 0, 500, 281);
-		const srcEncoded = canvas.toDataURL('image/jpeg', 0.8);
+		canvas.width = 640;
+		canvas.height = 360;
+		ctx.drawImage(video, -320, -180, 1280, 720 );
+		const srcEncoded = canvas.toDataURL('image/jpeg', 0.7);
 		img.src = srcEncoded;
 		chunks.push({
 			dataUrl: srcEncoded
