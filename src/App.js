@@ -12,7 +12,7 @@ function App() {
 	const [watch, setWatch] = useState(false);
 	var chunks = [];
 	var idRef;
-	const frameTime = 250;
+	const frameTime = 125;
 
 
 
@@ -29,15 +29,15 @@ function App() {
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
 		var img = document.getElementById('img');
-		canvas.width = 300;
-		canvas.height = 169;
-		ctx.drawImage(video, 0, 0, 300, 169);
-		const srcEncoded = canvas.toDataURL('image/jpeg', 0.9);
+		canvas.width = 600;
+		canvas.height = 337;
+		ctx.drawImage(video, 0, 0, 600, 337);
+		const srcEncoded = canvas.toDataURL('image/jpeg', 0.5);
 		img.src = srcEncoded;
 		chunks.push({
 			dataUrl: srcEncoded
 		})
-		if (chunks.length === 30) {
+		if (chunks.length === 50) {
 			const chunksCopy = [...chunks];
 			uploadChunk(chunksCopy)
 			chunks.splice(0, chunks.length);
