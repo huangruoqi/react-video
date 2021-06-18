@@ -21,9 +21,9 @@ const Display = ({ startStream, stopStream }) => {
 	})
 	return (
 		<div>
-			<video id="video" className="video" height="225" width="400" playsInline autoPlay muted loop></video>
+			<video id="video" className="video" height="169" width="300" playsInline autoPlay muted loop></video>
 			<canvas style={{ display: 'none' }} id="canvas"></canvas>
-			<img id="img" height="225" width="400" alt='No Video'></img>
+			<img id="img" height="169" width="300" alt='No Video'></img>
 			<Button text='Stop' color='steelblue' onClick={stopStream} />
 		</div>
 	)
